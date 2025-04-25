@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [idea, setIdea] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [domains, setDomains] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setDomains([]);
+
+    try {
+      const res = await fetch('http://localhost:8000/suggest-domains', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idea }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.detail || 'Something went wrong');
+      }
+
+      const data = await res.json();
+      setDomains(data);  // simplified: just list of strings
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app">
+      <h1>🧠 Domain Finder</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={idea}
+          onChange={(e) => setIdea(e.target.value)}
+          placeholder="Describe your startup idea..."
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Searching...' : 'Find Domains'}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      </form>
+
+      {error && <p className="error">❌ {error}</p>}
+
+      {domains.length > 0 && (
+        <ul className="results">
+          {domains.map((name) => (
+            <li key={name}>✅ <strong>{name}</strong></li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
