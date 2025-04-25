@@ -17,7 +17,7 @@ class DomainSuggestion(BaseModel):
     name: str
     available: bool
 
-@app.post("/suggest-domains", response_model=List[DomainSuggestion])
+@app.post("/suggest-domains", response_model=List[str])
 def suggest_domains(request: IdeaRequest):
     idea = request.idea
     collected = []
@@ -26,24 +26,22 @@ def suggest_domains(request: IdeaRequest):
 
     while len(collected) < 10 and len(seen_domains) < max_total_domains:
         suggestions = get_ai_suggestions(idea)
-
-        # Remove already seen domains
         suggestions = [d for d in suggestions if d not in seen_domains]
         seen_domains.update(suggestions)
 
         if not suggestions:
-            break  # nothing new to try
+            break
 
         availability_results = check_domain_availability_bulk(suggestions)
 
         for item in availability_results:
-            print(f"{item['domain']}: {'✅' if item['available'] else '❌'}")
             if item["available"]:
-                collected.append(DomainSuggestion(name=item["domain"], available=True))
+                collected.append(item["domain"])
                 if len(collected) >= 10:
                     break
 
     return collected
+
 
 
 def get_ai_suggestions(idea: str) -> List[str]:
