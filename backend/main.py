@@ -70,15 +70,13 @@ def get_ai_suggestions(idea: str) -> List[str]:
 
 
 def check_domain_availability_bulk(domains: List[str]) -> Dict[str, bool]:
-
     godaddy_api_key = os.getenv("GODADDY_API_KEY")
-    godaddy_api_secret= os.getenv("GODADDY_API_SECRET")
-
+    godaddy_api_secret = os.getenv("GODADDY_API_SECRET")
 
     if not godaddy_api_key or not godaddy_api_secret:
         raise HTTPException(status_code=500, detail="GoDaddy API credentials missing")
 
-    url = os.getenv("GODADDY_API_URL")
+    url = "https://api.ote-godaddy.com/v1/domains/available"
     headers = {
         "Authorization": f"sso-key {godaddy_api_key}:{godaddy_api_secret}",
         "Content-Type": "application/json"
@@ -89,14 +87,17 @@ def check_domain_availability_bulk(domains: List[str]) -> Dict[str, bool]:
             url,
             params={"checkType": "FAST"},
             headers=headers,
-            json=domains  # just the list, not {"domains": [...]}
+            json=domains
         )
-        if response.status_code != 200:
-            print("GoDaddy error:", response.text)
-            raise HTTPException(status_code=502, detail="GoDaddy API error")
 
-        return response.json()["domains"]
+        json_data = response.json()
 
+        # 🛡️ Handle partial responses with errors
+        if "errors" in json_data:
+            print("⚠️ GoDaddy errors:", json_data["errors"])
+
+        # ✅ Only return valid domain entries
+        return json_data.get("domains", [])
 
     except Exception as e:
         print("GoDaddy API Exception:", str(e))
