@@ -12,7 +12,7 @@ from typing import List, Dict
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # or ["*"] to allow all
+    allow_origins=["https://domainly.me", "https://www.domainly.me"],  # Only your real domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

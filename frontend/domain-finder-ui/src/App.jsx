@@ -52,7 +52,7 @@ function App() {
         throw new Error("Idea description is too short. Please be more descriptive!");
       }
 
-      const res = await fetch('http://127.0.0.1:8000/suggest-domains', {
+      const res = await fetch('/api/suggest-domains', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idea }),
