@@ -13,8 +13,8 @@
 /* --- DEFAULT THEME (Dark) --- */
 :root {
   /* Color Palette (Dark Theme) */
-  --color-background: #1a1a1d;
-  --color-surface: #27272a;
+  --color-background: #1a1a1d; /* Base page background */
+  --color-surface: #27272a;    /* Component background */
   --color-surface-light: #3f3f46;
   --color-text: #f4f4f5;
   --color-text-muted: #a1a1aa;
@@ -74,8 +74,8 @@
 
 /* --- LIGHT THEME --- */
 body[data-theme="light"] {
-  --color-background: #f8f9fa;
-  --color-surface: #ffffff;
+  --color-background: #f8f9fa; /* Define light background */
+  --color-surface: #ffffff;    /* Define light surface */
   --color-surface-light: #f1f3f5;
   --color-text: #212529;
   --color-text-muted: #6c757d;
@@ -103,25 +103,29 @@ body[data-theme="light"] {
   --shadow-inset-intensity: rgba(0, 0, 0, 0.1); /* Light theme inset shadow */
 }
 
-/* --- Base Styles --- */
-html { scroll-behavior: smooth; }
-html, body, #root { height: 100%; }
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  background-color: var(--color-background); /* Use page background var */
+  transition: background-color var(--transition-base);
+}
 
-/* Around line 116 in App.css */
 body {
   font-family: var(--font-family-primary), var(--font-family-sans);
+  min-height: 100vh; /* Make sure body fills height */
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   color: var(--color-text);
-  background-color: var(--color-surface); /* <--- TO THIS */
+  background-color: var(--color-background); /* Use page background var */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: var(--spacing-lg);
+  align-items: flex-start; /* Aligns app container to the top */
+  padding: var(--spacing-lg); /* Padding around the app container */
   overflow-y: auto;
   transition: background-color var(--transition-base), color var(--transition-base);
+  margin: 0; /* Explicitly remove default body margin */
 }
 
 ul { list-style: none; }
@@ -141,24 +145,29 @@ button {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  min-height: 100%;
+  max-width: 700px; /* Overall max width */
+  min-height: calc(100vh - (var(--spacing-lg) * 2)); /* Adjust min-height based on body padding */
+  background-color: var(--color-surface); /* Use surface color for the app area */
+  box-shadow: var(--shadow-lg-current); /* Add shadow for floating effect */
+  border-radius: var(--border-radius-lg); /* Add rounding */
+  /* Margins removed as body padding handles spacing */
 }
 
 .content-wrapper {
   width: 100%;
-  max-width: 700px;
-  background-color: var(--color-surface);
-  border-radius: var(--border-radius-lg);
+  /* max-width removed, handled by app-container */
+  background-color: var(--color-surface); /* Should match app-container or be transparent */
+  border-radius: var(--border-radius-lg); /* Can inherit or be defined */
   padding: var(--spacing-xl);
-  box-shadow: var(--shadow-lg-current);
+  /* box-shadow removed, handled by app-container */
   border: var(--border-width) solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
+  /* margin-top/bottom removed */
   border-top: 3px solid var(--color-primary);
   transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  flex-grow: 1; /* Allow content to push footer down */
 }
 
 /* --- Header --- */
@@ -464,7 +473,7 @@ textarea:disabled {
   /* Default background for dark theme */
   background-color: #333;
   /* Default text color (inverted background) */
-  color: var(--color-background);
+  color: var(--color-background); /* Use --color-background for text color */
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 4px;
   font-size: var(--font-size-sm);
@@ -476,11 +485,11 @@ textarea:disabled {
   z-index: 10;
 }
 
-/* Override tooltip background for light theme */
+/* Override tooltip text color for light theme */
 body[data-theme="light"] .copy-button .copy-tooltip {
-  background-color: #555; /* Darker grey for light mode tooltip */
-  /* color: var(--color-background); should still work */
+ color: var(--color-background); /* Ensure text contrasts with dark tooltip bg */
 }
+
 
 .copy-button:hover .copy-tooltip {
   opacity: 1;
@@ -512,13 +521,16 @@ body[data-theme="light"] .copy-button .copy-tooltip {
 
 /* --- Footer --- */
 .app-footer {
-  margin-top: auto; /* Pushes footer to bottom if content is short */
+  margin-top: auto; /* Push footer to bottom within app-container */
+  width: 100%; /* Make footer span the app-container width */
+  /* max-width: 700px; */ /* Removed, should naturally fit content-wrapper */
   padding: var(--spacing-md) 0;
   text-align: center;
-  font-size: 0.9rem; /* Slightly smaller footer text */
+  font-size: 0.9rem;
   color: var(--color-text-muted);
   opacity: 0.8;
   transition: color var(--transition-base);
+  /* margin-bottom: var(--spacing-lg); */ /* Maybe not needed if app-container has padding/margin */
 }
 
 /* --- Accessibility --- */
@@ -536,7 +548,7 @@ body[data-theme="light"] .copy-button .copy-tooltip {
 
 /* --- Top Nav --- */
 .top-nav {
-  position: fixed;
+  position: fixed; /* Changed to fixed to stay on screen */
   top: 1.5rem;
   right: 2rem;
   display: flex;
@@ -677,7 +689,10 @@ body[data-theme="light"] .copy-button .copy-tooltip {
       --font-size-xl: 1.15rem;
       --font-size-lg: 1rem;
     }
-    body { padding: var(--spacing-md); }
+    body { padding: var(--spacing-md); } /* Adjust body padding */
+    .app-container {
+      min-height: calc(100vh - (var(--spacing-md) * 2)); /* Adjust app container height */
+    }
     .content-wrapper {
         padding: var(--spacing-lg);
         gap: var(--spacing-lg);
@@ -696,7 +711,10 @@ body[data-theme="light"] .copy-button .copy-tooltip {
       --font-size-base: 0.9rem;
       --line-height-base: 1.6;
     }
-    body { padding: var(--spacing-sm); }
+    body { padding: var(--spacing-sm); } /* Adjust body padding */
+     .app-container {
+      min-height: calc(100vh - (var(--spacing-sm) * 2)); /* Adjust app container height */
+    }
     .content-wrapper { padding: var(--spacing-md); gap: var(--spacing-md); }
     textarea { min-height: 90px; }
 
