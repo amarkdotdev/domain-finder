@@ -10,86 +10,130 @@
   padding: 0;
 }
 
+/* --- DEFAULT THEME (Dark) --- */
 :root {
-  /* Color Palette (Dark Theme) - Retained */
+  /* Color Palette (Dark Theme) */
   --color-background: #1a1a1d;
   --color-surface: #27272a;
-  --color-surface-light: #3f3f46; /* For subtle hovers */
+  --color-surface-light: #3f3f46;
   --color-text: #f4f4f5;
   --color-text-muted: #a1a1aa;
-  --color-primary: #8b5cf6;    /* Vibrant Purple */
+  --color-primary: #8b5cf6;
   --color-primary-dark: #7c3aed;
   --color-primary-light-bg: rgba(139, 92, 246, 0.1);
-  --color-border: #4b4b53;     /* Slightly softer border */
+  --color-border: #4b4b53;
   --color-input-bg: #3a3a40;
   --color-white: #ffffff;
   --color-error: #f87171;
+  --color-error-text: #f87171; /* Ensure text color matches icon */
   --color-error-light-bg: rgba(248, 113, 113, 0.1);
   --color-info: #60a5fa;
+  --color-info-text: #60a5fa;  /* Ensure text color matches icon */
   --color-info-light-bg: rgba(96, 165, 250, 0.1);
   --color-success: #4ade80;
+  --color-success-text: #4ade80; /* Ensure text color matches icon */
   --color-success-light-bg: rgba(74, 222, 128, 0.1);
 
-  /* Typography - Balanced Sizes */
+  /* Shadows - Define base and theme-specific version */
+  --shadow-intensity-sm: rgba(0, 0, 0, 0.15);
+  --shadow-intensity-md: rgba(0, 0, 0, 0.2);
+  --shadow-intensity-lg: rgba(0, 0, 0, 0.25);
+  --shadow-inset-intensity: rgba(0, 0, 0, 0.3); /* Dark theme inset shadow */
+
+  --shadow-sm-current: 0 1px 2px var(--shadow-intensity-sm);
+  --shadow-md-current: 0 4px 8px var(--shadow-intensity-md);
+  --shadow-lg-current: 0 10px 20px var(--shadow-intensity-lg);
+  --shadow-inset-current: inset 0 1px 3px var(--shadow-inset-intensity);
+  --shadow-focus-ring: 0 0 0 3px rgba(139, 92, 246, 0.4); /* Keep primary focus ring */
+
+  /* Shared variables */
   --font-family-primary: 'Poppins', sans-serif;
   --font-family-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  --font-size-base: 0.95rem;   /* Approx 15.2px - good balance */
-  --font-size-sm: 0.85rem;   /* Slightly larger small text */
-  --font-size-lg: 1.05rem;   /* Slightly larger large text */
-  --font-size-xl: 1.25rem;   /* Title/Heading */
-  --font-size-xxl: 1.75rem;  /* Main Heading */
-  --font-size-icon: 1.15rem;  /* Base icon size */
-  --line-height-base: 1.7;     /* Generous line height for readability */
+  --font-size-base: 0.95rem;
+  --font-size-sm: 0.85rem;
+  --font-size-lg: 1.05rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.75rem;
+  --font-size-icon: 1.15rem;
+  --line-height-base: 1.7;
   --line-height-heading: 1.4;
-
-  /* Spacing - More Breathable */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;      /* Back to 1rem as base medium */
-  --spacing-lg: 1.4rem;    /* Slightly reduced large */
-  --spacing-xl: 2rem;      /* Back to 2rem as base extra-large */
+  --spacing-md: 1rem;
+  --spacing-lg: 1.4rem;
+  --spacing-xl: 2rem;
   --spacing-xxl: 3rem;
-
-  /* Borders & Shadows - Refined */
-  --border-radius-sm: 0.375rem; /* 6px */
-  --border-radius-md: 0.625rem; /* 10px - softer medium radius */
-  --border-radius-lg: 0.875rem; /* 14px - softer large radius */
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.625rem;
+  --border-radius-lg: 0.875rem;
   --border-width: 1px;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.15);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly softer medium shadow */
-  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.25); /* Slightly softer large shadow */
-  --shadow-focus-ring: 0 0 0 3px rgba(139, 92, 246, 0.4);
-
-  /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-base: 0.25s ease;
-  --transition-slow: 0.4s ease; /* For subtle background effects */
+  --transition-slow: 0.4s ease;
+}
+
+/* --- LIGHT THEME --- */
+body[data-theme="light"] {
+  --color-background: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-surface-light: #f1f3f5;
+  --color-text: #212529;
+  --color-text-muted: #6c757d;
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #7c3aed;
+  --color-primary-light-bg: rgba(139, 92, 246, 0.1);
+  --color-border: #dee2e6;
+  --color-input-bg: #e9ecef;
+
+  /* Adjusted status colors for light theme */
+  --color-error: #dc3545;
+  --color-error-text: #dc3545;
+  --color-error-light-bg: rgba(220, 53, 69, 0.1);
+  --color-info: #0d6efd;
+  --color-info-text: #0d6efd;
+  --color-info-light-bg: rgba(13, 110, 253, 0.1);
+  --color-success: #198754;
+  --color-success-text: #198754;
+  --color-success-light-bg: rgba(25, 135, 84, 0.1);
+
+  /* Lighter Shadows for Light Theme */
+  --shadow-intensity-sm: rgba(0, 0, 0, 0.05);
+  --shadow-intensity-md: rgba(0, 0, 0, 0.08);
+  --shadow-intensity-lg: rgba(0, 0, 0, 0.1);
+  --shadow-inset-intensity: rgba(0, 0, 0, 0.1); /* Light theme inset shadow */
 }
 
 /* --- Base Styles --- */
 html { scroll-behavior: smooth; }
 html, body, #root { height: 100%; }
 
+/* Around line 116 in App.css */
 body {
   font-family: var(--font-family-primary), var(--font-family-sans);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   color: var(--color-text);
-  background-color: var(--color-background);
-  /* Subtle background gradient for depth */
-  background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.03), transparent 30%),
-                    radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.05), transparent 40%);
+  background-color: var(--color-surface); /* <--- TO THIS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items to the top */
-  padding: var(--spacing-lg); /* Base padding around */
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  align-items: flex-start;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 ul { list-style: none; }
-button { font-family: inherit; cursor: pointer; border: none; background-color: transparent; color: inherit; }
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
+}
+
 
 /* --- Layout Containers --- */
 .app-container {
@@ -102,35 +146,35 @@ button { font-family: inherit; cursor: pointer; border: none; background-color: 
 
 .content-wrapper {
   width: 100%;
-  max-width: 700px; /* Comfortable max width */
+  max-width: 700px;
   background-color: var(--color-surface);
-  border-radius: var(--border-radius-lg); /* Softer corners */
-  padding: var(--spacing-xl); /* Generous padding */
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg-current);
   border: var(--border-width) solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl); /* Good spacing between sections */
+  gap: var(--spacing-xl);
   margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl); /* Ensure space before footer might be needed */
-  /* Subtle border highlight */
+  margin-bottom: var(--spacing-xl);
   border-top: 3px solid var(--color-primary);
+  transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* --- Header --- */
 .app-header {
   text-align: center;
-  padding-bottom: var(--spacing-sm); /* Less padding below header text */
-  /* Removed border-bottom for cleaner look, rely on spacing */
+  padding-bottom: var(--spacing-sm);
 }
 
 .header-icon {
-  font-size: 2.5rem; /* Prominent icon */
+  font-size: 2.5rem;
   color: var(--color-primary);
   margin-bottom: var(--spacing-md);
   display: block;
   margin-left: auto;
   margin-right: auto;
+  transition: color var(--transition-base);
 }
 
 .app-header h1 {
@@ -139,48 +183,54 @@ button { font-family: inherit; cursor: pointer; border: none; background-color: 
   line-height: var(--line-height-heading);
   margin-bottom: var(--spacing-xs);
   color: var(--color-text);
+  transition: color var(--transition-base);
 }
 
 .app-header .subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-muted);
   font-weight: 300;
+  transition: color var(--transition-base);
 }
 
 /* --- Search Form --- */
 .search-form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md); /* Consistent medium gap */
+  gap: var(--spacing-md);
 }
 
 .textarea-container { position: relative; }
 
 textarea {
   width: 100%;
-  padding: var(--spacing-md); /* Comfortable padding */
+  padding: var(--spacing-md);
   font-family: inherit;
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   color: var(--color-text);
   background-color: var(--color-input-bg);
   border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius-md); /* Softer radius */
+  border-radius: var(--border-radius-md);
   resize: vertical;
-  min-height: 110px; /* Slightly taller */
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); /* Inner shadow for depth */
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  min-height: 110px;
+  /* Use theme-based inset shadow */
+  box-shadow: var(--shadow-inset-current);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base),
+              background-color var(--transition-base), color var(--transition-base);
 }
 
 textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-focus-ring), inset 0 1px 3px rgba(0,0,0,0.3);
+  /* Combine focus ring and theme-based inset shadow */
+  box-shadow: var(--shadow-focus-ring), var(--shadow-inset-current);
 }
 
 textarea::placeholder {
   color: var(--color-text-muted);
   opacity: 0.7;
+  transition: color var(--transition-base);
 }
 
 textarea:disabled {
@@ -195,6 +245,7 @@ textarea:disabled {
   margin-top: var(--spacing-sm);
   text-align: right;
   opacity: 0.8;
+  transition: color var(--transition-base);
 }
 
 .submit-button {
@@ -202,30 +253,30 @@ textarea:disabled {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) var(--spacing-lg); /* Substantial padding */
-  font-size: var(--font-size-lg); /* Larger text on button */
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
   font-weight: 500;
-  color: var(--color-white);
+  color: var(--color-white); /* Keep text white on primary bg */
   background-color: var(--color-primary);
   border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md-current);
+  letter-spacing: 0.5px;
   transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-base);
-  box-shadow: var(--shadow-md);
-  letter-spacing: 0.5px; /* Slight letter spacing */
 }
 
 .submit-button:hover:not(:disabled) {
   background-color: var(--color-primary-dark);
-  transform: translateY(-3px) scale(1.02); /* More pronounced hover effect */
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-lg-current);
 }
 
 .submit-button:active:not(:disabled) {
-  transform: translateY(0) scale(1); /* Reset transform on click */
-  box-shadow: var(--shadow-sm);
+  transform: translateY(0) scale(1);
+  box-shadow: var(--shadow-sm-current);
 }
 
 .submit-button:disabled {
-  background-color: var(--color-text-muted);
+  background-color: var(--color-text-muted); /* Use muted text color for disabled bg */
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
@@ -234,6 +285,7 @@ textarea:disabled {
 
 .submit-button .spinner-icon {
   font-size: var(--font-size-icon);
+  /* Animation defined below */
 }
 
 /* --- Results Section --- */
@@ -243,9 +295,9 @@ textarea:disabled {
   margin-top: var(--spacing-md);
 }
 
-/* Status Messages (Loading, Error, Info, Placeholder) */
+/* Status Messages */
 .status-message {
-  padding: var(--spacing-lg); /* Good padding */
+  padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
   display: flex;
   flex-direction: column;
@@ -253,25 +305,32 @@ textarea:disabled {
   text-align: center;
   gap: var(--spacing-sm);
   font-size: var(--font-size-base);
+  /* Start with transparent border */
   border: var(--border-width) solid transparent;
   margin-bottom: var(--spacing-lg);
-  background-color: rgba(255, 255, 255, 0.02); /* Very subtle background */
+  background-color: rgba(255, 255, 255, 0.02); /* Default subtle background */
+  transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base);
 }
 
 .status-message svg {
-  font-size: 1.8rem; /* Slightly larger status icons */
+  font-size: 1.8rem;
   margin-bottom: var(--spacing-xs);
+  transition: color var(--transition-base);
 }
 
-/* Specific Status Styles */
+/* Specific Status Styles using theme vars */
 .status-message.loading,
 .status-message.info {
   background-color: var(--color-info-light-bg);
-  border-color: rgba(96, 165, 250, 0.3);
-  color: var(--color-info);
+  /* Use the light-bg for the border color too for consistency */
+  border-color: var(--color-info-light-bg);
+  color: var(--color-info-text); /* Use specific text color */
 }
+
 .status-message.loading svg,
-.status-message.info svg { color: var(--color-info); }
+.status-message.info svg {
+  color: var(--color-info); /* Icon color matches main color */
+}
 
 .status-message.loading {
   flex-direction: row;
@@ -280,11 +339,12 @@ textarea:disabled {
 }
 .status-message.loading svg { margin-bottom: 0; }
 
+
 .status-message.placeholder {
   background-color: transparent;
   border: 2px dashed var(--color-border);
   color: var(--color-text-muted);
-  padding: var(--spacing-xl); /* Extra padding for placeholder */
+  padding: var(--spacing-xl);
 }
 .status-message.placeholder .placeholder-tip {
   font-size: var(--font-size-sm);
@@ -294,10 +354,14 @@ textarea:disabled {
 
 .status-message.error {
   background-color: var(--color-error-light-bg);
-  border-color: rgba(248, 113, 113, 0.3);
-  color: var(--color-error);
+  /* Use the light-bg for the border color */
+  border-color: var(--color-error-light-bg);
+  color: var(--color-error-text); /* Use specific text color */
 }
-.status-message.error svg { color: var(--color-error); }
+
+.status-message.error svg {
+  color: var(--color-error); /* Icon color matches main color */
+}
 
 .status-message.info .info-tip {
     font-size: var(--font-size-sm);
@@ -309,16 +373,17 @@ textarea:disabled {
 .results-list h2 {
   font-size: var(--font-size-xl);
   font-weight: 500;
-  color: var(--color-text); /* Clearer heading color */
+  color: var(--color-text);
   margin-bottom: var(--spacing-lg);
   padding-bottom: var(--spacing-sm);
   border-bottom: var(--border-width) solid var(--color-border);
+  transition: color var(--transition-base), border-color var(--transition-base);
 }
 
 .results-list ul {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md); /* Good spacing between items */
+  gap: var(--spacing-md);
 }
 
 .domain-item {
@@ -331,14 +396,14 @@ textarea:disabled {
   border-radius: var(--border-radius-md);
   transition: background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
   overflow: hidden;
-  position: relative; /* For potential pseudo-elements */
+  position: relative;
 }
 
 .domain-item:hover {
   background-color: var(--color-surface-light);
-  border-color: var(--color-primary); /* Highlight border on hover */
-  transform: translateY(-2px) scale(1.01); /* Subtle lift and scale */
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  border-color: var(--color-primary);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--shadow-md-current);
 }
 
 .domain-name {
@@ -350,18 +415,20 @@ textarea:disabled {
   margin-right: var(--spacing-md);
   color: var(--color-text);
   flex-grow: 1;
-  font-size: var(--font-size-lg); /* Clear domain name size */
+  font-size: var(--font-size-lg);
+  transition: color var(--transition-base);
 }
 
 .icon-available {
   color: var(--color-success);
   font-size: var(--font-size-icon);
   flex-shrink: 0;
+  transition: color var(--transition-base);
 }
 
 /* Copy Button */
 .copy-button {
-  position: relative;
+  position: relative; /* Needed for tooltip positioning */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -371,15 +438,15 @@ textarea:disabled {
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--border-radius-sm);
   flex-shrink: 0;
-  transition: all var(--transition-fast);
   background-color: var(--color-surface);
+  transition: all var(--transition-fast), background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
 }
 
 .copy-button:hover {
   color: var(--color-primary);
   background-color: var(--color-surface-light);
   border-color: var(--color-primary);
-  transform: scale(1.05); /* Slight scale on button hover */
+  transform: scale(1.05);
 }
 
 .copy-button.copied {
@@ -388,40 +455,50 @@ textarea:disabled {
   background-color: var(--color-success-light-bg);
 }
 
-/* Tooltip for Copy Button */
+/* --- Tooltip --- */
 .copy-button .copy-tooltip {
   position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
+  /* Default background for dark theme */
   background-color: #333;
-  color: var(--color-white);
+  /* Default text color (inverted background) */
+  color: var(--color-background);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 4px;
   font-size: var(--font-size-sm);
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-fast), visibility var(--transition-fast), transform 0.1s ease; /* Add transform transition */
+  transition: opacity var(--transition-fast), visibility var(--transition-fast), transform 0.1s ease, background-color var(--transition-base), color var(--transition-base);
   pointer-events: none;
   z-index: 10;
+}
+
+/* Override tooltip background for light theme */
+body[data-theme="light"] .copy-button .copy-tooltip {
+  background-color: #555; /* Darker grey for light mode tooltip */
+  /* color: var(--color-background); should still work */
 }
 
 .copy-button:hover .copy-tooltip {
   opacity: 1;
   visibility: visible;
   transition-delay: 0.4s;
-  transform: translateX(-50%) translateY(-3px); /* Pop up slightly */
+  transform: translateX(-50%) translateY(-3px);
 }
 
+/* Copied tooltip style */
 .copy-button.copied .copy-tooltip {
   background-color: var(--color-success);
-  color: var(--color-white);
+  color: var(--color-white); /* Explicitly white text */
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
   animation: popUpFadeOut 1.5s ease-in-out forwards;
 }
+
 
 .results-note {
     font-size: var(--font-size-sm);
@@ -430,69 +507,33 @@ textarea:disabled {
     text-align: center;
     font-style: italic;
     opacity: 0.8;
+    transition: color var(--transition-base);
 }
-
 
 /* --- Footer --- */
 .app-footer {
-  margin-top: auto;
+  margin-top: auto; /* Pushes footer to bottom if content is short */
   padding: var(--spacing-md) 0;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Slightly smaller footer text */
   color: var(--color-text-muted);
   opacity: 0.8;
+  transition: color var(--transition-base);
 }
-
-.footer-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.footer-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.footer-link:hover {
-  color: var(--color-primary-dark);
-  text-decoration: underline;
-}
-
-.footer-separator {
-  color: var(--color-text-muted);
-}
-
 
 /* --- Accessibility --- */
 .sr-only {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-.about-button {
-  position: fixed;
-  top: 1.5rem;
-  right: 2rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1rem;
-  box-shadow: var(--shadow-sm);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  z-index: 1000; /* Always above other content */
-}
-
-.about-button:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-2px);
-}
-
-/* --- Top Nav --- */
 /* --- Top Nav --- */
 .top-nav {
   position: fixed;
@@ -504,22 +545,50 @@ textarea:disabled {
   z-index: 1000;
 }
 
+/* About Link */
 .about-link {
   padding: 0.5rem 1rem;
   background-color: var(--color-primary);
   color: var(--color-white);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-md);
   font-weight: bold;
   text-decoration: none;
   font-size: 1rem;
-  box-shadow: var(--shadow-sm);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: var(--shadow-sm-current);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow var(--transition-base);
 }
 
 .about-link:hover {
   background-color: var(--color-primary-dark);
   transform: translateY(-2px);
 }
+
+/* --- Theme Toggle Button --- */
+.theme-toggle-button {
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm-current);
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+}
+
+.theme-toggle-button:hover {
+  background-color: var(--color-surface-light);
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.theme-toggle-button svg {
+  display: block; /* Prevents extra space below icon */
+}
+
 
 /* --- Mobile Menu --- */
 .mobile-menu {
@@ -530,31 +599,32 @@ textarea:disabled {
   background-color: var(--color-surface);
   color: var(--color-primary);
   border: var(--border-width) solid var(--color-primary);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-md);
   padding: 0.5rem;
   font-size: 1.5rem;
   cursor: pointer;
-  display: none; /* Hidden on desktop */
+  display: none; /* Hidden on desktop by default */
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
 }
 
 .menu-button:hover {
-  background-color: var(--color-primary-dark);
-  color: var(--color-white);
+  background-color: var(--color-primary-light-bg);
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
-  top: 2.5rem;
+  top: calc(100% + 0.5rem);
   right: 0;
   background-color: var(--color-surface);
   border: var(--border-width) solid var(--color-border);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md-current);
   padding: 0.5rem 0;
   min-width: 150px;
-  animation: fadeInDropdown 0.3s ease-out;
+  animation: fadeInDropdown 0.2s ease-out;
   z-index: 999;
+  transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .dropdown-link {
@@ -563,50 +633,26 @@ textarea:disabled {
   color: var(--color-text);
   text-decoration: none;
   font-weight: 500;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 .dropdown-link:hover {
   background-color: var(--color-input-bg);
+  color: var(--color-primary);
 }
-
-/* Animations */
-@keyframes fadeInDropdown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Responsive --- */
-@media (max-width: 768px) {
-  .about-link {
-    display: none; /* Hide About on mobile */
-  }
-  .menu-button {
-    display: block; /* Show hamburger on mobile */
-  }
-}
-/* --- Responsive Behavior --- */
-@media (max-width: 768px) {
-  .about-link {
-    display: none; /* Hide About link on mobile */
-  }
-  .menu-button {
-    display: block; /* Show hamburger on mobile */
-  }
-}
-
 
 
 /* --- Animations --- */
+@keyframes fadeInDropdown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .spinner-icon { animation: spin 1s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
 @keyframes popUpFadeOut {
   0% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
   80% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
@@ -615,34 +661,83 @@ textarea:disabled {
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
-  :root {
-    --font-size-xxl: 1.6rem;
-    --font-size-xl: 1.15rem;
-    --font-size-lg: 1rem;
-  }
-  body { padding: var(--spacing-md); } /* Adjust padding */
-  .content-wrapper {
-      padding: var(--spacing-lg); /* Reduce padding slightly */
-      gap: var(--spacing-lg);
-  }
+   .top-nav {
+      top: 1rem;
+      right: 1rem;
+   }
+   .about-link {
+      display: none;
+   }
+   .menu-button {
+      display: block;
+   }
+   /* Adjust root font sizes for smaller screens */
+   :root {
+      --font-size-xxl: 1.6rem;
+      --font-size-xl: 1.15rem;
+      --font-size-lg: 1rem;
+    }
+    body { padding: var(--spacing-md); }
+    .content-wrapper {
+        padding: var(--spacing-lg);
+        gap: var(--spacing-lg);
+    }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --font-size-base: 0.9rem; /* Slightly smaller base on mobile */
-    --line-height-base: 1.6;
-  }
-  body { padding: var(--spacing-sm); }
-  .content-wrapper { padding: var(--spacing-md); gap: var(--spacing-md); }
-  textarea { min-height: 90px; }
+    .top-nav {
+        gap: 0.75rem;
+    }
+    .theme-toggle-button {
+      padding: 0.4rem;
+      font-size: 1.1rem;
+    }
+    :root {
+      --font-size-base: 0.9rem;
+      --line-height-base: 1.6;
+    }
+    body { padding: var(--spacing-sm); }
+    .content-wrapper { padding: var(--spacing-md); gap: var(--spacing-md); }
+    textarea { min-height: 90px; }
 
-  /* Stack domain items */
-  .domain-item { flex-direction: column; align-items: flex-start; gap: var(--spacing-sm); padding: var(--spacing-md); }
-  .domain-name { margin-right: 0; font-size: var(--font-size-base); }
-  .copy-button { align-self: flex-end; }
-  .copy-button .copy-tooltip { top: calc(100% + 4px); right: 0; transform: translateX(0); }
-  .copy-button:hover .copy-tooltip { transform: translateX(0) translateY(-3px); } /* Adjust tooltip pop */
+    /* Stack domain items */
+    .domain-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md);
+    }
+    .domain-name {
+        margin-right: 0;
+        font-size: var(--font-size-base); /* Adjust if needed */
+    }
+    .copy-button {
+        align-self: flex-end; /* Position copy button to the right */
+    }
+    /* Adjust tooltip position for stacked layout if needed */
+    .copy-button .copy-tooltip {
+        /* Position relative to the button in its new location */
+        bottom: calc(100% + 4px);
+        left: auto; /* Reset left */
+        right: 0; /* Align to the right edge of the button */
+        transform: translateX(0); /* Reset horizontal transform */
+    }
+    .copy-button:hover .copy-tooltip {
+        transform: translateX(0) translateY(-3px); /* Adjust pop */
+    }
+    @keyframes popUpFadeOut { /* Redefine for mobile if needed */
+        0% { opacity: 1; transform: translateX(0) translateY(-5px); }
+        80% { opacity: 1; transform: translateX(0) translateY(-5px); }
+        100% { opacity: 0; transform: translateX(0) translateY(0px); }
+    }
 
-  .submit-button { font-size: var(--font-size-base); padding: var(--spacing-sm) var(--spacing-md); }
-  .submit-hint { text-align: left; margin-top: var(--spacing-xs); }
+
+    .submit-button {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    .submit-hint {
+        text-align: left;
+        margin-top: var(--spacing-xs);
+    }
 }

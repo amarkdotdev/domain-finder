@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Import useEffect
 import { Link } from 'react-router-dom';
-import { FaLightbulb, FaSearch, FaCopy, FaCheckCircle, FaTimesCircle, FaSpinner, FaCheck } from 'react-icons/fa';
+import {
+  FaLightbulb, FaSearch, FaCopy, FaCheckCircle, FaTimesCircle,
+  FaSpinner, FaCheck, FaSun, FaMoon // Import Sun and Moon icons
+} from 'react-icons/fa';
 import './App.css';
 
 function App() {
@@ -12,7 +15,29 @@ function App() {
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // --- Theme State ---
+  // Initialize state from localStorage or default to 'dark'
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+  });
+
+  // --- Effect to Apply Theme and Save to localStorage ---
+  useEffect(() => {
+    // Apply the theme attribute to the body element
+    document.body.setAttribute('data-theme', theme);
+    // Save the current theme to localStorage
+    localStorage.setItem('theme', theme);
+  }, [theme]); // Re-run this effect whenever the theme state changes
+
+  // --- Theme Toggle Function ---
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+  };
+
+  // --- Existing Handlers (handleSubmit, handleCopy, handleKeyDown) ---
   const handleSubmit = async (e) => {
+    // ... (keep existing code)
     if (e) e.preventDefault();
     if (!idea.trim() || loading) return;
 
@@ -51,7 +76,8 @@ function App() {
   };
 
   const handleCopy = (domain) => {
-    navigator.clipboard.writeText(domain)
+    // ... (keep existing code)
+     navigator.clipboard.writeText(domain)
       .then(() => {
         setCopiedDomain(domain);
         setTimeout(() => setCopiedDomain(''), 2000);
@@ -63,12 +89,14 @@ function App() {
   };
 
   const handleKeyDown = (e) => {
+    // ... (keep existing code)
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
     }
   };
 
+  // --- Conditional Rendering Flags (Unchanged) ---
   const showPlaceholder = !loading && !error && !searchAttempted;
   const showNoResults = !loading && !error && searchAttempted && domains.length === 0;
   const showResults = !loading && domains.length > 0;
@@ -77,25 +105,38 @@ function App() {
     <div className="app-container">
       {/* --- Top Navigation --- */}
       <div className="top-nav">
+        {/* Theme Toggle Button */}
+        <button
+          className="theme-toggle-button"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
+          {theme === 'dark' ? <FaSun /> : <FaMoon />}
+        </button>
+
         {/* Desktop About link */}
         <Link to="/about" className="about-link">About</Link>
 
         {/* Mobile Hamburger */}
         <div className="mobile-menu">
-          <button
+           <button
             className="menu-button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle mobile menu"
           >
             ☰
           </button>
-
           {/* Mobile Dropdown */}
           {mobileMenuOpen && (
             <div className="dropdown-menu">
               <Link to="/about" className="dropdown-link" onClick={() => setMobileMenuOpen(false)}>
                 About
               </Link>
+              {/* Optional: Add theme toggle inside mobile menu too/instead */}
+              {/* <button className="dropdown-link" onClick={() => { toggleTheme(); setMobileMenuOpen(false); }}>
+                 Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
+              </button> */}
             </div>
           )}
         </div>
@@ -103,7 +144,8 @@ function App() {
 
       {/* --- Main Content --- */}
       <main className="content-wrapper">
-        <header className="app-header">
+        {/* ... (Rest of the header, form, results - keep existing JSX) ... */}
+         <header className="app-header">
           <FaLightbulb className="header-icon" aria-hidden="true" />
           <h1>Domain Idea Generator</h1>
           <p className="subtitle">Let's find the perfect domain for your next big thing!</p>
