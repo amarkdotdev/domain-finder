@@ -1,20 +1,56 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KYPTVCPCHW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KYPTVCPCHW');
-</script>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Domain Finder</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G‑KYPTVCPCHW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G‑KYPTVCPCHW');
+    </script>
+
+    <!-- Primary SEO -->
+    <title>AI Domain Finder – Instant Domain Name Ideas | Domainly</title>
+    <meta name="description"
+          content="Domainly is an AI‑powered domain name generator that delivers 10 available, brand‑ready domains in under two seconds. Brainstorm, validate, and register – all in one place." />
+    <link rel="canonical" href="https://www.domainly.me/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url"  content="https://www.domainly.me/" />
+    <meta property="og:title" content="AI Domain Finder – Instant Domain Name Ideas" />
+    <meta property="og:description" content="Generate creative, available domains instantly with Domainly’s AI." />
+    <meta property="og:image" content="https://www.domainly.me/og-card.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card"  content="summary_large_image" />
+    <meta name="twitter:title" content="AI Domain Finder – Instant Domain Name Ideas" />
+    <meta name="twitter:description" content="Generate creative, available domains instantly with Domainly’s AI." />
+    <meta name="twitter:image" content="https://www.domainly.me/og-card.png" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Domainly – AI Domain Name Generator",
+      "url": "https://www.domainly.me",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.domainly.me/?idea={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
